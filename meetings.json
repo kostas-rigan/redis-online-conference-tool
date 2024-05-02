@@ -1,26 +1,281 @@
 [
     {
-        "meeting_id": "BIjnMc3G",
-        "title": "OPXEJV",
-        "description": "This meeting is about LIIQHX",
-        "isPublic": 2
+        "meeting_id": "IoNPxCEK",
+        "title": "FIHEXX",
+        "description": "This meeting is about WTERMK",
+        "isPublic": true,
+        "audience": [
+            "knqbet@example.com",
+            "pnasfa@example.com",
+            "wcgkle@example.com",
+            "yhvskj@example.com",
+            "cswcsk@example.com",
+            "caaatq@example.com"
+        ]
     },
     {
-        "meeting_id": "z3CVXFpO",
-        "title": "WUHXIY",
-        "description": "This meeting is about QVHWDO",
-        "isPublic": 2
+        "meeting_id": "q4JPxbth",
+        "title": "YEOEGU",
+        "description": "This meeting is about OWIVCX",
+        "isPublic": false,
+        "audience": [
+            "knqbet@example.com",
+            "jujqfj@example.com",
+            "dfjkce@example.com",
+            "pnasfa@example.com",
+            "yhvskj@example.com",
+            "caaatq@example.com",
+            "svowdk@example.com",
+            "cswcsk@example.com",
+            "wcgkle@example.com",
+            "lhzlqu@example.com"
+        ]
     },
     {
-        "meeting_id": "19LHpTY8",
-        "title": "UIEBXD",
-        "description": "This meeting is about AKGVMJ",
-        "isPublic": 2
+        "meeting_id": "sFfDIKqX",
+        "title": "WLDKJY",
+        "description": "This meeting is about PMMRYO",
+        "isPublic": true,
+        "audience": [
+            "caaatq@example.com",
+            "cswcsk@example.com",
+            "svowdk@example.com"
+        ]
     },
     {
-        "meeting_id": "o1vGiwsX",
-        "title": "PWGQYM",
-        "description": "This meeting is about OEQNGP",
-        "isPublic": 1
+        "meeting_id": "5kuPWJoB",
+        "title": "YAUJHN",
+        "description": "This meeting is about DDRYAH",
+        "isPublic": true,
+        "audience": [
+            "cswcsk@example.com",
+            "caaatq@example.com",
+            "lhzlqu@example.com",
+            "yhvskj@example.com",
+            "pnasfa@example.com",
+            "knqbet@example.com",
+            "wcgkle@example.com",
+            "svowdk@example.com",
+            "dfjkce@example.com"
+        ]
+    },
+    {
+        "meeting_id": "1UKOVygt",
+        "title": "UIJYVD",
+        "description": "This meeting is about JDNUFU",
+        "isPublic": false,
+        "audience": [
+            "pnasfa@example.com",
+            "knqbet@example.com"
+        ]
+    },
+    {
+        "meeting_id": "GMqXTiC4",
+        "title": "WXATPD",
+        "description": "This meeting is about RNTYOP",
+        "isPublic": true,
+        "audience": [
+            "wcgkle@example.com",
+            "lhzlqu@example.com",
+            "cswcsk@example.com",
+            "dfjkce@example.com",
+            "svowdk@example.com",
+            "pnasfa@example.com",
+            "yhvskj@example.com"
+        ]
+    },
+    {
+        "meeting_id": "GLjO6pdg",
+        "title": "HJSBVG",
+        "description": "This meeting is about VSYGDP",
+        "isPublic": true,
+        "audience": [
+            "cswcsk@example.com",
+            "svowdk@example.com",
+            "caaatq@example.com",
+            "pnasfa@example.com",
+            "dfjkce@example.com",
+            "knqbet@example.com",
+            "jujqfj@example.com",
+            "lhzlqu@example.com",
+            "yhvskj@example.com"
+        ]
+    },
+    {
+        "meeting_id": "BvctYpeg",
+        "title": "NCIRLN",
+        "description": "This meeting is about ORMSEM",
+        "isPublic": false,
+        "audience": [
+            "pnasfa@example.com",
+            "svowdk@example.com"
+        ]
+    },
+    {
+        "meeting_id": "7FAkLKax",
+        "title": "MRNEWR",
+        "description": "This meeting is about XRSIUI",
+        "isPublic": true,
+        "audience": [
+            "cswcsk@example.com",
+            "pnasfa@example.com"
+        ]
+    },
+    {
+        "meeting_id": "2dvRQh1A",
+        "title": "KFKFLY",
+        "description": "This meeting is about JSTPOT",
+        "isPublic": false,
+        "audience": [
+            "knqbet@example.com",
+            "pnasfa@example.com",
+            "svowdk@example.com",
+            "wcgkle@example.com",
+            "jujqfj@example.com",
+            "dfjkce@example.com",
+            "caaatq@example.com",
+            "lhzlqu@example.com",
+            "yhvskj@example.com",
+            "cswcsk@example.com"
+        ]
+    },
+    {
+        "meeting_id": "kuMtpnk4",
+        "title": "GUFMNC",
+        "description": "This meeting is about QLBZVN",
+        "isPublic": false,
+        "audience": [
+            "cswcsk@example.com",
+            "caaatq@example.com",
+            "pnasfa@example.com",
+            "svowdk@example.com",
+            "yhvskj@example.com",
+            "dfjkce@example.com"
+        ]
+    },
+    {
+        "meeting_id": "jCa0Bv9u",
+        "title": "QYKMDQ",
+        "description": "This meeting is about XRKEIM",
+        "isPublic": true,
+        "audience": [
+            "yhvskj@example.com",
+            "lhzlqu@example.com",
+            "wcgkle@example.com"
+        ]
+    },
+    {
+        "meeting_id": "x0lKDh9K",
+        "title": "NOXUYJ",
+        "description": "This meeting is about YGBMGZ",
+        "isPublic": false,
+        "audience": [
+            "svowdk@example.com",
+            "yhvskj@example.com",
+            "dfjkce@example.com"
+        ]
+    },
+    {
+        "meeting_id": "olajYqzh",
+        "title": "VZTHCI",
+        "description": "This meeting is about JADGCU",
+        "isPublic": true,
+        "audience": [
+            "wcgkle@example.com",
+            "caaatq@example.com"
+        ]
+    },
+    {
+        "meeting_id": "QZZOU9id",
+        "title": "ERWADZ",
+        "description": "This meeting is about LYOMUV",
+        "isPublic": true,
+        "audience": [
+            "cswcsk@example.com",
+            "svowdk@example.com",
+            "wcgkle@example.com",
+            "pnasfa@example.com",
+            "jujqfj@example.com",
+            "lhzlqu@example.com",
+            "yhvskj@example.com",
+            "caaatq@example.com",
+            "dfjkce@example.com"
+        ]
+    },
+    {
+        "meeting_id": "e0Ka83dq",
+        "title": "WBBVDO",
+        "description": "This meeting is about IPHGXI",
+        "isPublic": false,
+        "audience": [
+            "jujqfj@example.com",
+            "wcgkle@example.com",
+            "lhzlqu@example.com",
+            "dfjkce@example.com",
+            "svowdk@example.com",
+            "yhvskj@example.com",
+            "caaatq@example.com",
+            "knqbet@example.com",
+            "pnasfa@example.com",
+            "cswcsk@example.com"
+        ]
+    },
+    {
+        "meeting_id": "mtDO0EkN",
+        "title": "WSHPNX",
+        "description": "This meeting is about PJOGEA",
+        "isPublic": false,
+        "audience": [
+            "dfjkce@example.com",
+            "cswcsk@example.com",
+            "yhvskj@example.com",
+            "svowdk@example.com",
+            "wcgkle@example.com",
+            "knqbet@example.com",
+            "caaatq@example.com",
+            "pnasfa@example.com"
+        ]
+    },
+    {
+        "meeting_id": "2URCVn9D",
+        "title": "HQQKXO",
+        "description": "This meeting is about YBPUSG",
+        "isPublic": false,
+        "audience": [
+            "jujqfj@example.com",
+            "pnasfa@example.com",
+            "svowdk@example.com"
+        ]
+    },
+    {
+        "meeting_id": "gjxqcH3s",
+        "title": "FFJWMB",
+        "description": "This meeting is about IVLRJC",
+        "isPublic": true,
+        "audience": [
+            "jujqfj@example.com",
+            "lhzlqu@example.com",
+            "knqbet@example.com",
+            "dfjkce@example.com",
+            "yhvskj@example.com",
+            "cswcsk@example.com",
+            "wcgkle@example.com",
+            "pnasfa@example.com",
+            "svowdk@example.com",
+            "caaatq@example.com"
+        ]
+    },
+    {
+        "meeting_id": "Y2NkLKbs",
+        "title": "XNPNLG",
+        "description": "This meeting is about LCNBJR",
+        "isPublic": false,
+        "audience": [
+            "caaatq@example.com",
+            "jujqfj@example.com",
+            "cswcsk@example.com",
+            "svowdk@example.com",
+            "dfjkce@example.com"
+        ]
     }
 ]
