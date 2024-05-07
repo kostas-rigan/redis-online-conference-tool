@@ -3,7 +3,7 @@
         "meeting_id": "IoNPxCEK",
         "title": "FIHEXX",
         "description": "This meeting is about WTERMK",
-        "isPublic": true,
+        "isPublic": 1,
         "audience": [
             "knqbet@example.com",
             "pnasfa@example.com",
@@ -17,7 +17,7 @@
         "meeting_id": "q4JPxbth",
         "title": "YEOEGU",
         "description": "This meeting is about OWIVCX",
-        "isPublic": false,
+        "isPublic": 0,
         "audience": [
             "knqbet@example.com",
             "jujqfj@example.com",
@@ -35,7 +35,7 @@
         "meeting_id": "sFfDIKqX",
         "title": "WLDKJY",
         "description": "This meeting is about PMMRYO",
-        "isPublic": true,
+        "isPublic": 1,
         "audience": [
             "caaatq@example.com",
             "cswcsk@example.com",
@@ -46,7 +46,7 @@
         "meeting_id": "5kuPWJoB",
         "title": "YAUJHN",
         "description": "This meeting is about DDRYAH",
-        "isPublic": true,
+        "isPublic": 1,
         "audience": [
             "cswcsk@example.com",
             "caaatq@example.com",
@@ -63,7 +63,7 @@
         "meeting_id": "1UKOVygt",
         "title": "UIJYVD",
         "description": "This meeting is about JDNUFU",
-        "isPublic": false,
+        "isPublic": 0,
         "audience": [
             "pnasfa@example.com",
             "knqbet@example.com"
@@ -73,7 +73,7 @@
         "meeting_id": "GMqXTiC4",
         "title": "WXATPD",
         "description": "This meeting is about RNTYOP",
-        "isPublic": true,
+        "isPublic": 1,
         "audience": [
             "wcgkle@example.com",
             "lhzlqu@example.com",
@@ -88,7 +88,7 @@
         "meeting_id": "GLjO6pdg",
         "title": "HJSBVG",
         "description": "This meeting is about VSYGDP",
-        "isPublic": true,
+        "isPublic": 1,
         "audience": [
             "cswcsk@example.com",
             "svowdk@example.com",
@@ -105,7 +105,7 @@
         "meeting_id": "BvctYpeg",
         "title": "NCIRLN",
         "description": "This meeting is about ORMSEM",
-        "isPublic": false,
+        "isPublic": 0,
         "audience": [
             "pnasfa@example.com",
             "svowdk@example.com"
@@ -115,7 +115,7 @@
         "meeting_id": "7FAkLKax",
         "title": "MRNEWR",
         "description": "This meeting is about XRSIUI",
-        "isPublic": true,
+        "isPublic": 1,
         "audience": [
             "cswcsk@example.com",
             "pnasfa@example.com"
@@ -125,7 +125,7 @@
         "meeting_id": "2dvRQh1A",
         "title": "KFKFLY",
         "description": "This meeting is about JSTPOT",
-        "isPublic": false,
+        "isPublic": 0,
         "audience": [
             "knqbet@example.com",
             "pnasfa@example.com",
@@ -143,7 +143,7 @@
         "meeting_id": "kuMtpnk4",
         "title": "GUFMNC",
         "description": "This meeting is about QLBZVN",
-        "isPublic": false,
+        "isPublic": 0,
         "audience": [
             "cswcsk@example.com",
             "caaatq@example.com",
@@ -157,7 +157,7 @@
         "meeting_id": "jCa0Bv9u",
         "title": "QYKMDQ",
         "description": "This meeting is about XRKEIM",
-        "isPublic": true,
+        "isPublic": 1,
         "audience": [
             "yhvskj@example.com",
             "lhzlqu@example.com",
@@ -168,7 +168,7 @@
         "meeting_id": "x0lKDh9K",
         "title": "NOXUYJ",
         "description": "This meeting is about YGBMGZ",
-        "isPublic": false,
+        "isPublic": 0,
         "audience": [
             "svowdk@example.com",
             "yhvskj@example.com",
@@ -179,7 +179,7 @@
         "meeting_id": "olajYqzh",
         "title": "VZTHCI",
         "description": "This meeting is about JADGCU",
-        "isPublic": true,
+        "isPublic": 1,
         "audience": [
             "wcgkle@example.com",
             "caaatq@example.com"
@@ -189,7 +189,7 @@
         "meeting_id": "QZZOU9id",
         "title": "ERWADZ",
         "description": "This meeting is about LYOMUV",
-        "isPublic": true,
+        "isPublic": 1,
         "audience": [
             "cswcsk@example.com",
             "svowdk@example.com",
@@ -206,7 +206,7 @@
         "meeting_id": "e0Ka83dq",
         "title": "WBBVDO",
         "description": "This meeting is about IPHGXI",
-        "isPublic": false,
+        "isPublic": 0,
         "audience": [
             "jujqfj@example.com",
             "wcgkle@example.com",
@@ -224,7 +224,7 @@
         "meeting_id": "mtDO0EkN",
         "title": "WSHPNX",
         "description": "This meeting is about PJOGEA",
-        "isPublic": false,
+        "isPublic": 0,
         "audience": [
             "dfjkce@example.com",
             "cswcsk@example.com",
@@ -240,7 +240,7 @@
         "meeting_id": "2URCVn9D",
         "title": "HQQKXO",
         "description": "This meeting is about YBPUSG",
-        "isPublic": false,
+        "isPublic": 0,
         "audience": [
             "jujqfj@example.com",
             "pnasfa@example.com",
@@ -251,7 +251,7 @@
         "meeting_id": "gjxqcH3s",
         "title": "FFJWMB",
         "description": "This meeting is about IVLRJC",
-        "isPublic": true,
+        "isPublic": 1,
         "audience": [
             "jujqfj@example.com",
             "lhzlqu@example.com",
@@ -269,7 +269,7 @@
         "meeting_id": "Y2NkLKbs",
         "title": "XNPNLG",
         "description": "This meeting is about LCNBJR",
-        "isPublic": false,
+        "isPublic": 0,
         "audience": [
             "caaatq@example.com",
             "jujqfj@example.com",
