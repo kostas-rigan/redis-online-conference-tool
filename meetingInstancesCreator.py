@@ -3,13 +3,16 @@ import json
 import random
 from datetime import datetime, timedelta
 
-def generate_meeting_instance(users, meetings, order_ids):
-    meeting = random.choice(meetings)
+def generate_meeting_instance(users, meeting, order_ids):
+    # meeting = random.choice(meetings)
     meeting_id = meeting["meeting_id"]
     order_id = order_ids.get(meeting_id, 0) + 1
     order_ids[meeting_id] = order_id
-    start_datetime = datetime.now() - timedelta(days=365)  # 1 year ago
-    end_datetime = datetime.now() + timedelta(days=365)
+    deviation = random.choice([-1, 1])
+    start_time_offset = random.randrange(1, 16)
+    end_time_offset = random.randrange(1, 16)
+    start_datetime = datetime.now() + deviation * timedelta(minutes=start_time_offset)
+    end_datetime = start_datetime + timedelta(minutes=end_time_offset)
     return {
         'meeting_id': meeting_id,
         'order_id': order_id,
@@ -19,7 +22,7 @@ def generate_meeting_instance(users, meetings, order_ids):
 
 def generate_meetings_instances(users, meetings, num_meetings):
     order_ids = {}
-    meetings_instances = [generate_meeting_instance(users, meetings, order_ids) for _ in range(num_meetings)]
+    meetings_instances = [generate_meeting_instance(users, meeting, order_ids) for meeting in meetings]
     return meetings_instances
 
 def write_to_json(meetings, filename):
