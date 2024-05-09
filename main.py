@@ -7,7 +7,7 @@ import json
 
 # 1 - Function: a user joins an active meeting instance
 def user_join(r, user, meeting):
-    if meeting.isPublic or user.email in meeting.audience:
+    if meeting.is_public or user.email in meeting.audience:
         event = {
             'event_id': ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)),
             'userID': user.id,
@@ -15,8 +15,10 @@ def user_join(r, user, meeting):
             'timestamp': datetime.now().isoformat()
         }
         r.rpush(f'eventsLog_{meeting.id}_{user.id}_1', json.dumps(event))
+        print(f'User {user.name} joined the meeting {meeting.title}')
     else:
         print(f'User {user.name} is not allowed to join the meeting {meeting.title}')
+
 
 
 # 6 - Function: a user posts a chat message
