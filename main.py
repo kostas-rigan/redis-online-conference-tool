@@ -3,13 +3,15 @@ from helper import *
 from entities import User, Meeting
 from datetime import datetime
 import json
+import string
+import random
 
 
 # 1 - Function: a user joins an active meeting instance
 def user_join(r, user, meeting):
     if meeting.is_public or user.email in meeting.audience:
         event = {
-            'event_id': ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)),
+            'event_id': f'{meeting.id}_{user.id}_1',
             'userID': user.id,
             'event_type': 1,
             'timestamp': datetime.now().isoformat()
@@ -18,9 +20,69 @@ def user_join(r, user, meeting):
         print(f'User {user.name} joined the meeting {meeting.title}')
     else:
         print(f'User {user.name} is not allowed to join the meeting {meeting.title}')
+     
+# 2 - Function: a user leaves an active meeting instance
+def user_leaves_meeting(r, user, meeting):
+    if (user.email in meeting.audience) and ():
+        event = {
+            'event_id': ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)),
+            'userID': user.id,
+            'event_type': 2,
+            'timestamp': datetime.now().isoformat()
+        }
+        r.rpush(f'eventsLog_{meeting.id}_{user.id}_1', json.dumps(event))
+        print(f'User {user.name} leaved the meeting {meeting.title}')
+    else:
+        print(f"User {user.name} wasn't in the meeting {meeting.title}")
+        
+# 3 - Function: Show meeting participants
+def show_participants(r,meeting):
+    # Initialize cursor
+    cursor = 0
 
+    # Initialize an empty list to store the results
+    events_type_1 = []
 
+    # Partial string to match
+    partial_event_id = meeting.id
 
+    # Scan through keys matching the pattern "event_type:1:*"
+    while True:
+        # Scan for keys matching the pattern "event_type:1:*"
+        cursor, keys = r.scan(cursor, match="event_type:1:*")
+        
+        # Append the keys to the events_type_1 list
+        events_type_1.extend(keys)
+        
+        # Break the loop when the cursor is 0
+        if cursor == 0:
+            break
+
+    # Now, let's filter out the keys that have event type 2
+    events_type_1_no_type_2 = []
+
+    for key in events_type_1:
+        # Check if the key doesn't have event type 2
+        if not r.exists(key.replace("event_type:1:", "event_type:2:")):
+            events_type_1_no_type_2.append(key)
+
+    # Now, filter keys based on partial match of event_id
+    filtered_keys = [key for key in events_type_1_no_type_2 if partial_event_id in key]
+
+    # Retrieve the values associated with the filtered keys
+    event_data = []
+
+    for key in filtered_keys:
+        # Retrieve the event data
+        event_data_json = r.get(key)
+        # Deserialize the JSON data
+        event_data_dict = json.loads(event_data_json)
+        # Append the event data dictionary to the event_data list
+        event_data.append(event_data_dict)
+
+    # Now event_data contains the values of all events with event type 1 but not event type 2, and with event_id containing the partial string
+    print(event_data)
+    
 # 6 - Function: a user posts a chat message
 def post_message(r: redis.StrictRedis, user: User, meeting: Meeting, message: str):
     message_dict = {
@@ -71,6 +133,8 @@ def main():
                 print(message)
         elif choice == '1':
             user_join(r, user, meeting)
+        elif choice == '3':
+            show_participants(r, meeting)
         else:
             break
 
