@@ -15,7 +15,7 @@ def user_join(r, user, meeting):
             'event_id': f'{meeting.id}_{user.id}_1',
             'userID': user.id,
             'event_type': 1,
-            'timestamp': datetime.now().isoformat()
+            'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         }
         r.rpush(f'eventsLog_{meeting.id}_{user.id}_1', json.dumps(event))
         print(f'User {user.name} joined the meeting {meeting.title}')
@@ -29,7 +29,7 @@ def user_leaves_meeting(r, user, meeting):
             'event_id': ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)),
             'userID': user.id,
             'event_type': 2,
-            'timestamp': datetime.now().isoformat()
+            'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         }
         r.rpush(f'eventsLog_{meeting.id}_{user.id}_1', json.dumps(event))
         print(f'User {user.name} leaved the meeting {meeting.title}')
@@ -134,6 +134,8 @@ def main():
                 print(message)
         elif choice == '1':
             user_join(r, user, meeting)
+        elif choice == '2':
+            user_leaves_meeting(r, user, meeting)
         elif choice == '3':
             show_participants(r, meeting)
         else:

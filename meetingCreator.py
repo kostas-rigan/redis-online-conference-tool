@@ -14,7 +14,7 @@ def generate_meeting(users):
         'meeting_id': meeting_id,
         'title': title,
         'description': description,
-        'isPublic': bool(isPublic),
+        'isPublic': isPublic,
         'audience': audience_emails
     }
 
