@@ -5,6 +5,20 @@ from datetime import datetime
 import json
 
 
+# 1 - Function: a user joins an active meeting instance
+def user_join(r, user, meeting):
+    if meeting.isPublic or user.email in meeting.audience:
+        event = {
+            'event_id': ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)),
+            'userID': user.id,
+            'event_type': 1,
+            'timestamp': datetime.now().isoformat()
+        }
+        r.rpush(f'eventsLog_{meeting.id}_{user.id}_1', json.dumps(event))
+    else:
+        print(f'User {user.name} is not allowed to join the meeting {meeting.title}')
+
+
 # 6 - Function: a user posts a chat message
 def post_message(r: redis.StrictRedis, user: User, meeting: Meeting, message: str):
     message_dict = {
@@ -53,6 +67,8 @@ def main():
             messages = get_chat_messages(r, meeting)
             for message in messages:
                 print(message)
+        elif choice == '1':
+            user_join(r, user, meeting)
         else:
             break
 
