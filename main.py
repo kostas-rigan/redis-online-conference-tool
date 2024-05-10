@@ -17,7 +17,7 @@ def user_join(r, user, meeting):
             'event_type': 1,
             'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         }
-        r.rpush(f'eventsLog_{meeting.id}_{user.id}_1', json.dumps(event))
+        r.rpush(f'events_log_{meeting.id}_{user.id}_1', json.dumps(event))
         print(f'User {user.name} joined the meeting {meeting.title}')
     else:
         print(f'User {user.name} is not allowed to join the meeting {meeting.title}')
@@ -31,7 +31,7 @@ def user_leaves_meeting(r, user, meeting):
             'event_type': 2,
             'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         }
-        r.rpush(f'eventsLog_{meeting.id}_{user.id}_1', json.dumps(event))
+        r.rpush(f'events_log_{meeting.id}_{user.id}_2', json.dumps(event))
         print(f'User {user.name} leaved the meeting {meeting.title}')
     else:
         print(f"User {user.name} wasn't in the meeting {meeting.title}")
@@ -83,6 +83,26 @@ def show_participants(r,meeting):
 
     # Now event_data contains the values of all events with event type 1 but not event type 2, and with event_id containing the partial string
     print(event_data)
+
+
+# 4 - Function: show active meetings
+def get_active_meetings(r: redis.StrictRedis):
+    cursor = 0
+    first_time = True
+    meetings_keys = set()
+    while cursor or first_time:
+        cursor, rd_vals = r.scan(cursor, 'meetings_*')
+        meetings_keys.update(extract_meeting_instances(rd_vals))
+        if first_time:
+            first_time = False
+    meetings = []
+    for meeting_key in meetings_keys:
+        res = unbyteify_dict(r.hgetall(meeting_key))
+        now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+        if res['fromdatetime'] < now < res['todatetime']:
+            meetings.append(res['meeting_id'])
+    return meetings
+
     
 # 6 - Function: a user posts a chat message
 def post_message(r: redis.StrictRedis, user: User, meeting: Meeting, message: str):
@@ -124,7 +144,16 @@ def main():
         user = User(get_random_user(content))
         meeting = Meeting(get_random_meeting(content))
         choice = input('Give your input: ')
-        if choice == '6':
+        if choice == '1':
+            user_join(r, user, meeting)
+        elif choice == '2':
+            user_leaves_meeting(r, user, meeting)
+        elif choice == '3':
+            show_participants(r, meeting)
+        elif choice == '4':
+            meetings = get_active_meetings(r)
+            print(meetings)
+        elif choice == '6':
             message = generate_message()
             post_message(r, user, meeting, message)
             print(f'User {user.name} sent a message successfully!')
@@ -132,12 +161,6 @@ def main():
             messages = get_chat_messages(r, meeting)
             for message in messages:
                 print(message)
-        elif choice == '1':
-            user_join(r, user, meeting)
-        elif choice == '2':
-            user_leaves_meeting(r, user, meeting)
-        elif choice == '3':
-            show_participants(r, meeting)
         else:
             break
 

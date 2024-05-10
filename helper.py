@@ -10,6 +10,7 @@ import json
 import redis
 from random import randrange
 from datetime import datetime
+import re
 
 
 def load_json(filename: str) -> list:
@@ -173,3 +174,19 @@ def get_random_meeting(dictionary) -> dict:
 def generate_message() -> str:
     '''Generates a message using current time'''
     return f'message {datetime.now()}'
+
+
+def extract_meeting_instances(vals):
+    pattern = re.compile(r'^meetings_instances_\d+$')
+    normal_vals = [val.decode('utf-8') for val in vals]
+    meeting_vals = list(filter(lambda x: re.search(pattern, x), normal_vals))
+    return meeting_vals
+
+
+def unbyteify_dict(dct: dict):
+    new_dct = {}
+    for key, value in dct.items():
+        nkey = key.decode('utf-8')
+        nvalue = value.decode('utf-8')
+        new_dct[nkey] = nvalue
+    return new_dct
