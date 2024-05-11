@@ -17,8 +17,9 @@ def user_join(r, user, meeting):
             'event_type': 1,
             'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         }
-        r.rpush(f'events_Log_{meeting.id}_{user.id}_1', json.dumps(event))
+        r.rpush(f'events_log_{meeting.id}_{user.id}_1', json.dumps(event))
         print(f'User {user.name} joined the meeting {meeting.title}')
+        print(f'events_log_{meeting.id}_{user.id}_2')
     else:
         print(f'User {user.name} is not allowed to join the meeting {meeting.title}')
      
@@ -28,7 +29,7 @@ def user_leaves_meeting(r, user, meeting):
     first_time = True
     event_keys = set()
     while cursor or first_time:
-        cursor, rd_vals = r.scan(cursor, f'event_{meeting.id}_{user.id}*')
+        cursor, rd_vals = r.scan(cursor, f'events_log_{meeting.id}_{user.id}*')
         event_keys.update(extract_meeting_instances(rd_vals))
         if first_time:
             first_time = False
@@ -36,7 +37,7 @@ def user_leaves_meeting(r, user, meeting):
     last_event = unbyteify_dict(r.hgetall(event_keys[-1]))
     if last_event['event_type'] == 1:
         event = {
-            'event_id': f'event_{meeting.id}_{user.id}_2',
+            'event_id': f'events_log_{meeting.id}_{user.id}_2',
             'userID': user.id,
             'event_type': 2,
             'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
@@ -52,14 +53,15 @@ def show_participants(r,meeting):
     first_time = True
     event_keys = set()
     while cursor or first_time:
-        cursor, rd_vals = r.scan(cursor, f'event_{meeting.id}*')
-        event_keys.update(extract_meeting_instances(rd_vals))
+        cursor, rd_vals = r.scan(cursor, f'events_log_{meeting.id}*')
+        event_keys.update(val.decode('utf-8') for val in rd_vals)
         if first_time:
             first_time = False
     
     participants = []
     for event in event_keys:
-        event_res = unbyteify_dict(r.hgetall(event))
+        event_res = r.lrange(event, 0, -1)[-1].decode('utf-8')
+        event_res = json.loads(event_res)
         if event_res['event_type'] == 1:
             participants.append(event_res['userID'])
         elif event_res['event_type'] == 2:
@@ -101,13 +103,13 @@ def participants_leave(r, meeting):
         event_res = unbyteify_dict(r.hgetall(event))
         if event_res['event_type'] == 1:
             event = {
-                'event_id': f'event_{meeting.id}_{event_res['userID']}_2',
+                'event_id': f'event_{meeting.id}_{event_res["userID"]}_2',
                 'userID': event_res['userID'],
                 'event_type': 2,
                 'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
             }
-            r.rpush(f'events_log_{meeting.id}_{event_res['userID']}_2', json.dumps(event))
-            print(f'User {event_res['userID']} leaved the meeting {meeting.title}')
+            r.rpush(f'events_log_{meeting.id}_{event_res["userID"]}_2', json.dumps(event))
+            print(f'User {event_res["userID"]} leaved the meeting {meeting.title}')
             
 
     

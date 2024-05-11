@@ -32,6 +32,6 @@ if __name__ == "__main__":
         meetings = json.load(f)
 
     event_types = [1, 2, 3]  # event_type can be 1 (join_meeting), 2 (leave_meeting), 3 (timeout)
-    num_entries = 100  # Change this number to generate a different number of log entries
+    num_entries = 5  # Change this number to generate a different number of log entries
     events_log = generate_events_log(users, meetings, event_types, num_entries)
     write_to_json(events_log, 'events_log.json')

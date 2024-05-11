@@ -1,72 +1,37 @@
 [
     {
-        "userID": "NOdFI9p0",
-        "name": "NDHSFS",
-        "age": 35,
-        "gender": "Male",
-        "email": "ndhsfs@teamsEmail.com"
-    },
-    {
-        "userID": "FzhAsXoz",
-        "name": "SGSMMH",
-        "age": 40,
-        "gender": "Male",
-        "email": "sgsmmh@teamsEmail.com"
-    },
-    {
-        "userID": "7YhKVLO5",
-        "name": "PZBHAU",
-        "age": 65,
+        "userID": "8JTVjS1I",
+        "name": "CMOYFB",
+        "age": 18,
         "gender": "Female",
-        "email": "pzbhau@teamsEmail.com"
+        "email": "cmoyfb@teamsEmail.com"
     },
     {
-        "userID": "iJXuZHpH",
-        "name": "CDDNKR",
-        "age": 51,
+        "userID": "0d1D07vK",
+        "name": "XSLZQG",
+        "age": 60,
         "gender": "Male",
-        "email": "cddnkr@teamsEmail.com"
+        "email": "xslzqg@teamsEmail.com"
     },
     {
-        "userID": "7SeIfNyP",
-        "name": "GQUKIE",
-        "age": 47,
+        "userID": "ff72velt",
+        "name": "QOHQEI",
+        "age": 21,
+        "gender": "Male",
+        "email": "qohqei@teamsEmail.com"
+    },
+    {
+        "userID": "zWrgnJYi",
+        "name": "LJAWKO",
+        "age": 67,
         "gender": "Female",
-        "email": "gqukie@teamsEmail.com"
+        "email": "ljawko@teamsEmail.com"
     },
     {
-        "userID": "zCR2CE0T",
-        "name": "OXMHUD",
-        "age": 36,
-        "gender": "Female",
-        "email": "oxmhud@teamsEmail.com"
-    },
-    {
-        "userID": "7TM29ODL",
-        "name": "ZQJMEC",
-        "age": 27,
+        "userID": "6z8Q6nhL",
+        "name": "RXRNIM",
+        "age": 18,
         "gender": "Male",
-        "email": "zqjmec@teamsEmail.com"
-    },
-    {
-        "userID": "RscNcmog",
-        "name": "ZCPFLW",
-        "age": 31,
-        "gender": "Male",
-        "email": "zcpflw@teamsEmail.com"
-    },
-    {
-        "userID": "1FHwBsmH",
-        "name": "OCVWAT",
-        "age": 22,
-        "gender": "Female",
-        "email": "ocvwat@teamsEmail.com"
-    },
-    {
-        "userID": "ckY7DkLt",
-        "name": "CRLRFX",
-        "age": 19,
-        "gender": "Male",
-        "email": "crlrfx@teamsEmail.com"
+        "email": "rxrnim@teamsEmail.com"
     }
 ]

@@ -30,6 +30,6 @@ if __name__ == "__main__":
     with open('users.json') as f:
         users = json.load(f)
     
-    num_meetings = 20  # Change this number to generate different number of meetings
+    num_meetings = 7  # Change this number to generate different number of meetings
     meetings = generate_meetings(users, num_meetings)
     write_to_json(meetings, 'meetings.json')
