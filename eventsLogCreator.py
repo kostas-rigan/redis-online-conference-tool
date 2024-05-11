@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 def generate_event_log_entry(users, meetings, event_types):
     meeting_id = random.choice(meetings)["meeting_id"]
     user_id = random.choice(users)["userID"]  # Assume each user has a unique ID
-    event_id = f'{meeting_id}_{user_id}_0'
+    event_id = f'event_{meeting_id}_{user_id}_0'
     event_type = random.choice(event_types)
     timestamp = datetime.now().isoformat()  # Get the current timestamp in ISO format
     return {
