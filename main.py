@@ -87,8 +87,28 @@ def get_active_meetings(r: redis.StrictRedis):
     return meetings
 
 # 5 - Function: when a meeting ends, all participants must leave
-def participants_leave():
-    pass
+def participants_leave(r, meeting):
+    cursor = 0
+    first_time = True
+    event_keys = set()
+    while cursor or first_time:
+        cursor, rd_vals = r.scan(cursor, f'event_{meeting.id}*')
+        event_keys.update(extract_meeting_instances(rd_vals))
+        if first_time:
+            first_time = False
+    
+    for event in event_keys:
+        event_res = unbyteify_dict(r.hgetall(event))
+        if event_res['event_type'] == 1:
+            event = {
+                'event_id': f'event_{meeting.id}_{event_res['userID']}_2',
+                'userID': event_res['userID'],
+                'event_type': 2,
+                'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+            }
+            r.rpush(f'events_log_{meeting.id}_{event_res['userID']}_2', json.dumps(event))
+            print(f'User {event_res['userID']} leaved the meeting {meeting.title}')
+            
 
     
 # 6 - Function: a user posts a chat message
@@ -174,6 +194,8 @@ def main():
         elif choice == '4':
             meetings = get_active_meetings(r)
             print(meetings)
+        elif choice == '5':
+            participants_leave(r, meeting)
         elif choice == '6':
             message = generate_message()
             post_message(r, user, meeting, message)
