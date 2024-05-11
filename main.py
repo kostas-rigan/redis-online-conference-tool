@@ -31,7 +31,7 @@ def user_leaves_meeting(r, user, meeting):
             'event_type': 2,
             'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         }
-        r.rpush(f'events_log_{meeting.id}_{user.id}_2', json.dumps(event))
+        r.rpush(f'events_log_{meeting.id}_{user.id}_1', json.dumps(event))
         print(f'User {user.name} leaved the meeting {meeting.title}')
     else:
         print(f"User {user.name} wasn't in the meeting {meeting.title}")
@@ -123,8 +123,33 @@ def get_chat_messages(r, meeting):
 
 
 # 8 - Function: show for each active meeting when (timestamp) current participants joined
-def get_active_participants_join_times(r, meeting):
-    pass
+def get_active_participants_join_times(r: redis.StrictRedis):
+    active_meetings = get_active_meetings(r)
+    meeting_participant_dict = {}
+    for active_meeting in active_meetings:
+        meeting_participant_dict[active_meeting] = []
+        event_log_keys = set()
+        cursor = 0
+        first_time = True
+        while cursor or first_time:
+            cursor, values = r.scan(cursor, f'events_log_{active_meeting}_*')
+            event_log_keys.update(val.decode('utf-8') for val in values)
+            if first_time:
+                first_time = False
+        for event_log_key in event_log_keys:
+            res = r.lrange(event_log_key, 0, -1)[-1].decode('utf-8')
+            meeting_participant_dict[active_meeting].append(res)
+    join_times_str = ''
+    for meeting, event_log in meeting_participant_dict.items():
+        join_times_str += f'{meeting}\n'
+        if event_log:
+            for event in event_log:
+                event = json.loads(event)
+                if event['event_type'] == 1:
+                    join_times_str += f'\t{event["userID"]}: {event["timestamp"]}\n'
+        else:
+            join_times_str += '\tNo active participants\n'
+    return join_times_str
 
 
 # 9 - Function: show for an active meeting and a user his/her chat messages
@@ -161,6 +186,9 @@ def main():
             messages = get_chat_messages(r, meeting)
             for message in messages:
                 print(message)
+        elif choice == '8':
+            join_times = get_active_participants_join_times(r)
+            print(join_times)
         else:
             break
 
