@@ -153,8 +153,14 @@ def get_active_participants_join_times(r: redis.StrictRedis):
 
 
 # 9 - Function: show for an active meeting and a user his/her chat messages
-def get_messages_for_meeting_and_user(r, meeting, user):
-    pass
+def get_messages_for_meeting_and_user(r, meeting: Meeting, user: User):
+    active_meetings = get_active_meetings(r)
+    if meeting.id in active_meetings:
+        chat_messages = get_chat_messages(r, meeting)
+        user_messages = list(filter(lambda x: user.id in x, chat_messages))
+        return '\n'.join(user_messages)
+    else:
+        return 'Meeting is not currently active!'
 
 
 def main():
@@ -189,6 +195,9 @@ def main():
         elif choice == '8':
             join_times = get_active_participants_join_times(r)
             print(join_times)
+        elif choice == '9':
+            user_messages = get_messages_for_meeting_and_user(r, meeting, user)
+            print(user_messages)
         else:
             break
 
