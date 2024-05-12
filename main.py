@@ -3,8 +3,7 @@ from helper import *
 from entities import User, Meeting
 from datetime import datetime
 import json
-import string
-import random
+import time, threading
 
 
 # 1 - Function: a user joins an active meeting instance
@@ -18,7 +17,6 @@ def user_join(r, user, meeting):
         }
         r.rpush(f'events_log_{meeting.id}_{user.id}_1', json.dumps(event))
         print(f'User {user.name} joined the meeting {meeting.title}')
-        print(f'events_log_{meeting.id}_{user.id}_2')
     else:
         print(f'User {user.name} is not allowed to join the meeting {meeting.title}')
      
@@ -91,12 +89,14 @@ def get_active_meetings(r: redis.StrictRedis):
     return meetings
 
 # 5 - Function: when a meeting ends, all participants must leave
-def participants_leave(r, meeting):
+def participants_leave(r, meeting=None, event_type=2, meeting_id=None):
     cursor = 0
     first_time = True
     event_keys = set()
+    if meeting:
+        meeting_id = meeting.id
     while cursor or first_time:
-        cursor, rd_vals = r.scan(cursor, f'events_log_{meeting.id}*')
+        cursor, rd_vals = r.scan(cursor, f'events_log_{meeting_id}*')
         event_keys.update(val.decode('utf-8') for val in rd_vals)
         if first_time:
             first_time = False
@@ -105,13 +105,13 @@ def participants_leave(r, meeting):
         event_res = json.loads(r.lrange(event, 0, -1)[-1].decode('utf-8'))
         if event_res['event_type'] == 1:
             event = {
-                'event_id': f'event_{meeting.id}_{event_res["userID"]}_2',
+                'event_id': f'event_{meeting_id}_{event_res["userID"]}_2',
                 'userID': event_res['userID'],
                 'event_type': 2,
                 'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
             }
-            r.rpush(f'events_log_{meeting.id}_{event_res["userID"]}_2', json.dumps(event))
-            print(f'User {event_res["userID"]} leaved the meeting {meeting.title}')
+            r.rpush(f'events_log_{meeting_id}_{event_res["userID"]}_{event_type}', json.dumps(event))
+            print(f'User {event_res["userID"]} leaved the meeting {meeting_id}')
             
 
     
@@ -172,17 +172,34 @@ def get_messages_for_meeting_and_user(r, meeting: Meeting, user: User):
         return '\n'.join(user_messages)
     else:
         return 'Meeting is not currently active!'
+    
+
+def controller(r: redis.StrictRedis, main: threading.Thread):
+    while main.is_alive():
+        cursor = 0
+        first_time = True
+        rd_vals = set()
+        while cursor or first_time:
+            cursor, keys = r.scan(cursor, 'meetings_*')
+            rd_vals.update(key.decode('utf-8') for key in keys)
+            if first_time:
+                first_time = False
+        meeting_instances = extract_meeting_instances(rd_vals)
+        # check time
+        for meeting_key in meeting_instances:
+            res = unbyteify_dict(r.hgetall(meeting_key))
+            now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+            if res['todatetime'] < now:
+                # if time is over, end meeting
+                participants_leave(r, meeting_id=res['meeting_id'], event_type=3)
+        
+        time.sleep(60)
 
 
-def main():
-    # Connect to Redis
-    r = redis.Redis(host='localhost', port=6379, db=0)
-
-    content = read_jsons()
-
-    load_redis(r, content)
-
-    while True:
+def run(content: dict, r: redis.StrictRedis, seconds_to_run: int):
+    time.sleep(1)
+    start_time = time.time()
+    while time.time() - start_time < seconds_to_run:
         user = User(get_random_user(content))
         meeting = Meeting(get_random_meeting(content))
         choice = input('Give your input: ')
@@ -199,7 +216,7 @@ def main():
             meetings = get_active_meetings(r)
             print(meetings)
         elif choice == '5':
-            participants_leave(r, meeting)
+            participants_leave(r, meeting=meeting)
         elif choice == '6':
             message = generate_message()
             post_message(r, user, meeting, message)
@@ -214,8 +231,28 @@ def main():
         elif choice == '9':
             user_messages = get_messages_for_meeting_and_user(r, meeting, user)
             print(user_messages)
-        else:
+        elif choice == 'exit':
             break
+        else:
+            print('Invalid choice, please choose 1-9 for any of the actions, or exit if you want to quit!')
+
+
+def main():
+    # Connect to Redis
+    r = redis.Redis(host='localhost', port=6379, db=0)
+
+    content = read_jsons()
+
+    load_redis(r, content)
+    main = threading.Thread(target=run, args=[content, r, 120])
+    main.start()
+
+    scheduler = threading.Thread(target=controller, args=[r, main])
+    scheduler.start()
+
+    main.join()
+
+    scheduler.join(timeout=1)
 
 
 if __name__ == '__main__':

@@ -178,7 +178,9 @@ def generate_message() -> str:
 
 def extract_meeting_instances(vals):
     pattern = re.compile(r'^meetings_instances_\d+$')
-    normal_vals = [val.decode('utf-8') for val in vals]
+    normal_vals = list(vals)
+    if isinstance(normal_vals[-1], bytes):
+        normal_vals = [val.decode('utf-8') for val in vals]
     meeting_vals = list(filter(lambda x: re.search(pattern, x), normal_vals))
     return meeting_vals
 
