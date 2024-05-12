@@ -1,32 +1,32 @@
 [
     {
-        "event_id": "event_MsCZBB61_zWrgnJYi_0",
-        "userID": "zWrgnJYi",
-        "event_type": 1,
-        "timestamp": "2024-05-11T21:10:51.607585"
-    },
-    {
-        "event_id": "event_oHtURrzv_6z8Q6nhL_0",
-        "userID": "6z8Q6nhL",
-        "event_type": 3,
-        "timestamp": "2024-05-11T21:10:51.607610"
-    },
-    {
-        "event_id": "event_jVyRClN8_zWrgnJYi_0",
-        "userID": "zWrgnJYi",
+        "event_id": "event_dZrjWXFL_4jhQ8b6Y_0",
+        "userID": "4jhQ8b6Y",
         "event_type": 2,
-        "timestamp": "2024-05-11T21:10:51.607615"
+        "timestamp": "2024-05-12T11:44:27.781245"
     },
     {
-        "event_id": "event_55I8fg3T_8JTVjS1I_0",
-        "userID": "8JTVjS1I",
-        "event_type": 3,
-        "timestamp": "2024-05-11T21:10:51.607620"
+        "event_id": "event_H6jPKqAY_4jhQ8b6Y_0",
+        "userID": "4jhQ8b6Y",
+        "event_type": 2,
+        "timestamp": "2024-05-12T11:44:27.781245"
     },
     {
-        "event_id": "event_mlUYnMz8_ff72velt_0",
-        "userID": "ff72velt",
+        "event_id": "event_zm6r3XyD_qfNoc7fI_0",
+        "userID": "qfNoc7fI",
+        "event_type": 2,
+        "timestamp": "2024-05-12T11:44:27.781245"
+    },
+    {
+        "event_id": "event_dZrjWXFL_qfNoc7fI_0",
+        "userID": "qfNoc7fI",
+        "event_type": 2,
+        "timestamp": "2024-05-12T11:44:27.781245"
+    },
+    {
+        "event_id": "event_H6jPKqAY_qfNoc7fI_0",
+        "userID": "qfNoc7fI",
         "event_type": 1,
-        "timestamp": "2024-05-11T21:10:51.607624"
+        "timestamp": "2024-05-12T11:44:27.781245"
     }
 ]

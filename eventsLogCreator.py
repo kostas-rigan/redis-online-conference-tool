@@ -24,7 +24,7 @@ def write_to_json(data, filename):
     with open(filename, 'w') as f:
         json.dump(data, f, indent=4)
 
-if __name__ == "__main__":
+def create():
     with open('users.json') as f:
         users = json.load(f)
         

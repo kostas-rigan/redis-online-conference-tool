@@ -24,7 +24,7 @@ def write_to_json(users, filename):
     with open(filename, 'w') as f:
         json.dump(users, f, indent=4)
 
-if __name__ == "__main__":
+def create():
     num_users = 5  # Change this number to generate different number of users
     users = generate_users(num_users)
     write_to_json(users, 'users.json')

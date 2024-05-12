@@ -26,7 +26,7 @@ def write_to_json(meetings, filename):
     with open(filename, 'w') as f:
         json.dump(meetings, f, indent=4)
 
-if __name__ == "__main__":
+def create():
     with open('users.json') as f:
         users = json.load(f)
     
