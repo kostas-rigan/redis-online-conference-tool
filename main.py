@@ -27,10 +27,10 @@ def user_join(r, user, meeting):
 def user_leaves_meeting(r, user, meeting):
     cursor = 0
     first_time = True
-    event_keys = set()
+    event_keys = []
     while cursor or first_time:
         cursor, rd_vals = r.scan(cursor, f'events_log_{meeting.id}_{user.id}*')
-        event_keys.update(extract_meeting_instances(rd_vals))
+        event_keys.append(extract_meeting_instances(rd_vals))
         if first_time:
             first_time = False
             
