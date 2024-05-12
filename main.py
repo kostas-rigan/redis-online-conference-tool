@@ -1,5 +1,4 @@
 import redis
-import random, string
 from helper import *
 from entities import User, Meeting
 from datetime import datetime
@@ -30,22 +29,25 @@ def user_leaves_meeting(r, user, meeting):
     event_keys = []
     while cursor or first_time:
         cursor, rd_vals = r.scan(cursor, f'events_log_{meeting.id}_{user.id}*')
-        event_keys.append(extract_meeting_instances(rd_vals))
+        event_keys.extend(val.decode('utf-8') for val in rd_vals)
         if first_time:
             first_time = False
-            
-    last_event = unbyteify_dict(r.hgetall(event_keys[-1]))
-    if last_event['event_type'] == 1:
-        event = {
-            'event_id': f'events_log_{meeting.id}_{user.id}_2',
-            'userID': user.id,
-            'event_type': 2,
-            'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
-        }
-        r.rpush(f'events_log_{meeting.id}_{user.id}_2', json.dumps(event))
-        print(f'User {user.name} leaved the meeting {meeting.title}')
+
+    if event_keys:        
+        last_event = json.loads(r.lrange(event_keys[-1], 0, -1)[-1])
+        if last_event['event_type'] == 1:
+            event = {
+                'event_id': f'events_log_{meeting.id}_{user.id}_2',
+                'userID': user.id,
+                'event_type': 2,
+                'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+            }
+            r.rpush(f'events_log_{meeting.id}_{user.id}_2', json.dumps(event))
+            print(f'User {user.name} leaved the meeting {meeting.title}')
+        else:
+            print(f'User {user.name} was not in the meeting {meeting.title}')
     else:
-        print(f'User {user.name} was not in the meeting {meeting.title}')
+        print('No valid keys')
         
 # 3 - Function: Show meeting participants
 def show_participants(r,meeting):
@@ -94,13 +96,13 @@ def participants_leave(r, meeting):
     first_time = True
     event_keys = set()
     while cursor or first_time:
-        cursor, rd_vals = r.scan(cursor, f'event_{meeting.id}*')
-        event_keys.update(extract_meeting_instances(rd_vals))
+        cursor, rd_vals = r.scan(cursor, f'events_log_{meeting.id}*')
+        event_keys.update(val.decode('utf-8') for val in rd_vals)
         if first_time:
             first_time = False
     
     for event in event_keys:
-        event_res = unbyteify_dict(r.hgetall(event))
+        event_res = json.loads(r.lrange(event, 0, -1)[-1].decode('utf-8'))
         if event_res['event_type'] == 1:
             event = {
                 'event_id': f'event_{meeting.id}_{event_res["userID"]}_2',
